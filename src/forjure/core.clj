@@ -19,7 +19,8 @@
           ~else)))))
 
 (defmacro if-let-last
-  " if-let but allows multiple items and checks if the last item is nil"
+  "✅
+   if-let but allows multiple items and checks if the last item is nil"
   {:added "1.0"}
   ([bindings then]
    `(if-let ~bindings ~then nil))
@@ -27,7 +28,7 @@
    (assert-args
     (vector? bindings) "a vector for its binding"
     (nil? oldform) "1 or 2 forms after binding vector")
-   (let [form (bindings 0) tst (bindings 1)]
+   (let [form (-> bindings pop last) tst (last bindings)]
      `(let [temp# ~tst]
         (if temp#
           (let [~form temp#]
