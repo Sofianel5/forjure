@@ -4,7 +4,6 @@
 
 (defmacro if-let-all
   " if-let but allows multiple items and checks if any are nil"
-  {:added "1.0"}
   ([bindings then]
    `(if-let ~bindings ~then nil))
   ([bindings then else & oldform]
@@ -21,7 +20,6 @@
 (defmacro if-let-last
   "✅
    if-let but allows multiple items and checks if the last item is nil"
-  {:added "1.0"}
   ([bindings then]
    `(if-let ~bindings ~then nil))
   ([bindings then else & oldform]
