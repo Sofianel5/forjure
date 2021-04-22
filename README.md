@@ -7,7 +7,7 @@ A compilation of useful clojure macros and tools I plan to make.
 ### Macros
 If-let-all: if-let but allows multiple items and checks if any are nil
 
-If-let-last: if-let but allows multiple items and checks if the last item is nil
+If-let-last: if-let but allows multiple items and checks if the last item is nil (done)
 
 If-let-on-{all/last} if-let but allows a custom function to be applied to the bindings
 

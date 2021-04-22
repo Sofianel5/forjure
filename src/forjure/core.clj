@@ -1,11 +1,19 @@
 (ns forjure.core)
 
-(def ^{:private true :macro true} assert-args #'clojure.core/assert-args)
+(defmacro assert-args
+  [& pairs]
+  `(do (when-not ~(first pairs)
+         (throw (IllegalArgumentException.
+                 (str (first ~'&form) " requires " ~(second pairs) " in " ~'*ns* ":" (:line (meta ~'&form))))))
+       ~(let [more (nnext pairs)]
+          (when more
+            (list* `assert-args more)))))
 
 (defmacro if-let-all
-  " if-let but allows multiple items and checks if any are nil"
+  "💈
+   if-let but allows multiple items and checks if any are nil"
   ([bindings then]
-   `(if-let ~bindings ~then nil))
+   `(if-let-all ~bindings ~then nil))
   ([bindings then else & oldform]
    (assert-args
     (vector? bindings) "a vector for its binding"
@@ -21,7 +29,7 @@
   "✅
    if-let but allows multiple items and checks if the last item is nil"
   ([bindings then]
-   `(if-let ~bindings ~then nil))
+   `(if-let-last ~bindings ~then nil))
   ([bindings then else & oldform]
    (assert-args
     (vector? bindings) "a vector for its binding"
@@ -31,4 +39,9 @@
         (if temp#
           (let [~form temp#]
             ~then)
-          ~else)))))
+          ; need to apply let anyway or will cause errors
+          (let bindings 
+            ~else))))))
+
+(if-let-last [a 0 b 1 c nil] b)
+
