@@ -4,7 +4,7 @@ A compilation of useful clojure macros and tools I plan to make.
 
 ## Usage
 
-# Macros
+### Macros
 If-let-all: if-let but allows multiple items and checks if any are nil
 
 If-let-last: if-let but allows multiple items and checks if the last item is nil
