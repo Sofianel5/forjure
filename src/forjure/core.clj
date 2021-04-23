@@ -40,8 +40,24 @@
           (let [~form temp#]
             ~then)
           ; need to apply let anyway or will cause errors
-          (let bindings 
+          `(let ~bindings
             ~else))))))
 
-(if-let-last [a 0 b 1 c nil] b)
+(defmacro keyword-map
+  "Turns a list of variables into a map of their names as keywords to their values"
+  [& bindings]
+  (into {} (map #(identity [(keyword (name '%)) %]) bindings)))
+
+(defn none-nil
+  "returns true if none of the items provided are nill"
+  [& items]
+  (not (some nil? items)))
+
+(defmacro if-assert 
+  "recieves a list of boolean expressions followed by a default value to return if the expression prior to it is false"
+  [bindings]
+  @bindings)
+
+
+
 
