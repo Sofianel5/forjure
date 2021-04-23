@@ -11,6 +11,14 @@ If-let-last: if-let but allows multiple items and checks if the last item is nil
 
 If-let-on-{all/last} if-let but allows a custom function to be applied to the bindings
 
+### Functions
+
+keyword-map: Turns a list of variables into a map of their names as keywords to their values
+
+none-nil: returns true if none of the items provided are nill
+
+if-assert: recieves a list of boolean expressions followed by a default value to return if the expression prior to it is false
+
 ## License
 
 Copyright © 2021 FIXME
